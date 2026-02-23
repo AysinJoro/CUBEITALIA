@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cube Italia S.R.L. — Business Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&family=Noto+Serif+SC:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080C18;
+  --bg2: #0E1525;
+  --bg3: #141E33;
+  --gold: #C8922A;
+  --gold-light: #E0A840;
+  --cyan: #00B8D4;
+  --cyan-dim: #007A8C;
+  --green: #00C878;
+  --red: #FF4C2B;
+  --orange: #FF7043;
+  --white: #FFFFFF;
+  --muted: #8A96AD;
+  --border: rgba(200,146,42,0.2);
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-cn: 'Noto Serif SC', serif;
+  --font-mono: 'Space Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body.lang-cn { font-family: var(--font-cn); }
+body.lang-cn .it { display: none !important; }
+body.lang-cn .cn { display: block !important; }
+body.lang-it .cn { display: none !important; }
+body.lang-it .it { display: block !important; }
+.cn { display: none; }
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.3;
+}
+
+/* ── LANGUAGE SWITCHER ── */
+.lang-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background: rgba(8, 12, 24, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-logo {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.lang-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg3);
+  border-radius: 6px;
+  padding: 4px;
+  border: 1px solid var(--border);
+}
+
+.lang-btn {
+  padding: 6px 18px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn.active {
+  background: var(--gold);
+  color: #1A0A00;
+  font-weight: 700;
+}
+
+/* ── NAV DOTS ── */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0.4;
+  border: none;
+}
+
+.nav-dot.active { background: var(--gold); opacity: 1; transform: scale(1.4); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,146,42,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; left: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,184,212,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 88px);
+  font-weight: 900;
+  line-height: 1.05;
+  max-width: 800px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+
+.hero-title .accent { color: var(--gold); }
+
+.hero-sub {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 18px;
+  font-weight: 300;
+  max-width: 560px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-tags {
+  margin-top: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+
+.tag {
+  padding: 7px 16px;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  background: rgba(200,146,42,0.06);
+}
+
+.hero-stats {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  max-width: 860px;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.0s forwards;
+}
+
+.stat-box {
+  background: var(--bg2);
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  border-right: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-box:last-child { border-right: 1px solid var(--border); }
+
+.stat-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: var(--gold);
+}
+
+.stat-val {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--gold);
+  display: block;
+}
+
+.stat-label {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ── SECTIONS ── */
+section { padding: 120px 60px; border-top: 1px solid rgba(255,255,255,0.04); }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 600px;
+  margin-bottom: 64px;
+  font-style: italic;
+}
+
+/* ── CARDS ── */
+.card-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.card-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  background: var(--bg2);
+  padding: 36px 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+.card-gold { border-top: 3px solid var(--gold); }
+.card-cyan { border-top: 3px solid var(--cyan); }
+.card-green { border-top: 3px solid var(--green); }
+.card-orange { border-top: 3px solid var(--orange); }
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.card-num {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.card-cyan .card-num { color: var(--cyan); }
+.card-green .card-num { color: var(--green); }
+.card-orange .card-num { color: var(--orange); }
+
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── PRODUCT CARDS ── */
+.product-card {
+  background: var(--bg2);
+  padding: 36px 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+
+.product-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.badge-cyan { background: rgba(0,184,212,0.15); color: var(--cyan); border: 1px solid rgba(0,184,212,0.3); }
+.badge-gold { background: rgba(200,146,42,0.15); color: var(--gold); border: 1px solid rgba(200,146,42,0.3); }
+.badge-green { background: rgba(0,200,120,0.12); color: var(--green); border: 1px solid rgba(0,200,120,0.3); }
+
+.product-name { font-family: var(--font-display); font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+.product-cat { font-size: 12px; color: var(--cyan); font-family: var(--font-mono); letter-spacing: 1px; margin-bottom: 20px; }
+
+.spec-list { list-style: none; margin-bottom: 24px; }
+.spec-list li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.spec-list li::before { content: '→'; color: var(--gold); font-size: 11px; }
+
+.price-tag {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+/* ── FINANCIALS TABLE ── */
+.fin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.fin-table th {
+  background: var(--bg3);
+  padding: 12px 16px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.fin-table td {
+  padding: 13px 16px;
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--muted);
+}
+
+.fin-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+.fin-table tr:hover td { background: rgba(200,146,42,0.04); }
+
+.fin-table .val { font-family: var(--font-mono); color: var(--white); text-align: right; }
+.fin-table .val-gold { font-family: var(--font-mono); color: var(--gold); text-align: right; font-weight: 700; }
+.fin-table .val-green { font-family: var(--font-mono); color: var(--green); text-align: right; }
+.fin-table .total-row td { background: rgba(200,146,42,0.08); border-color: var(--gold); color: var(--white); font-weight: 600; }
+
+/* ── EBITDA BIG ── */
+.ebitda-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.ebitda-block {
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ebitda-neg { background: rgba(255,76,43,0.06); border: 1px solid rgba(255,76,43,0.2); }
+.ebitda-pos { background: rgba(0,200,120,0.06); border: 1px solid rgba(0,200,120,0.2); }
+
+.ebitda-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.ebitda-val {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.ebitda-neg .ebitda-val { color: var(--red); }
+.ebitda-pos .ebitda-val { color: var(--green); }
+
+.ebitda-note { margin-top: 12px; font-size: 13px; color: var(--muted); }
+
+/* ── ROW METRICS ── */
+.metric-row {
+  display: flex;
+  align-items: center;
+  padding: 22px 28px;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--bg2);
+  margin-bottom: 2px;
+  gap: 24px;
+  transition: background 0.2s;
+}
+
+.metric-row:hover { background: var(--bg3); }
+
+.metric-bar {
+  width: 4px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+
+.metric-label { flex: 1; }
+.metric-label .mname { font-size: 14px; color: var(--white); margin-bottom: 3px; }
+.metric-label .msub { font-size: 11px; color: var(--muted); font-style: italic; }
+
+.metric-val {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 60px; }
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--gold), var(--cyan), transparent);
+}
+
+.tl-item {
+  position: relative;
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s;
+}
+
+.tl-item.visible { opacity: 1; transform: none; }
+
+.tl-dot {
+  position: absolute;
+  left: -48px;
+  top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--bg);
+}
+
+.tl-phase {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.tl-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.tl-bullets {
+  list-style: none;
+}
+
+.tl-bullets li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 4px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.tl-bullets li::before { content: '›'; color: var(--cyan); }
+
+/* ── TIER CARDS ── */
+.tier-card {
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.tier-stripe {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.tier-stripe-green { background: var(--green); }
+.tier-stripe-cyan { background: var(--cyan); }
+.tier-stripe-gold { background: var(--gold); }
+
+.tier-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 3px 8px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+
+.tier-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tier-sub { font-size: 11px; font-family: var(--font-mono); letter-spacing: 1px; margin-bottom: 24px; }
+
+.detail-section { margin-top: 16px; }
+.detail-section .dlabel { font-size: 11px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.detail-section .dval { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+
+.commission-box {
+  margin-top: 24px;
+  padding: 12px 16px;
+  background: rgba(0,0,0,0.3);
+  border-left: 3px solid;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* ── KPI TABLE ── */
+.kpi-table { width: 100%; border-collapse: collapse; }
+.kpi-table th {
+  background: var(--bg3);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.kpi-table td {
+  padding: 11px 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.kpi-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+.kpi-table .kpi-name { color: var(--white); font-weight: 500; }
+.kpi-table .kpi-t1 { color: var(--cyan); font-family: var(--font-mono); font-size: 11px; text-align: center; }
+.kpi-table .kpi-t3 { color: var(--green); font-family: var(--font-mono); font-size: 11px; text-align: center; }
+.kpi-table .kpi-alert { color: var(--red); font-size: 11px; }
+
+/* ── ACTION PLAN ── */
+.action-item {
+  display: grid;
+  grid-template-columns: 80px 120px 1fr 80px;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.05);
+  background: var(--bg2);
+  margin-bottom: 2px;
+  overflow: hidden;
+}
+
+.action-item:hover { background: var(--bg3); }
+
+.action-cell {
+  padding: 14px 16px;
+  font-size: 12px;
+  border-right: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+}
+
+.action-cell:last-child { border-right: none; }
+
+.action-date { font-family: var(--font-mono); color: var(--gold); font-size: 11px; }
+.action-who { color: var(--cyan); font-size: 11px; }
+.action-task { color: var(--white); }
+.priority-high { color: var(--orange); font-family: var(--font-mono); font-size: 11px; justify-content: center; }
+.priority-med { color: var(--gold); font-family: var(--font-mono); font-size: 11px; justify-content: center; }
+
+/* ── PARTNER CARDS ── */
+.partner-card {
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 32px 28px;
+}
+
+.partner-name {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.partner-tier {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.partner-points { list-style: none; margin-bottom: 20px; }
+.partner-points li { font-size: 12px; color: var(--muted); padding: 4px 0; }
+.partner-points li::before { content: '▸  '; color: var(--cyan); font-size: 10px; }
+
+.partner-status {
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.partner-margin { font-size: 12px; color: var(--gold); }
+
+/* ── MVP BOXES ── */
+.mvp-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.mvp-box { background: var(--bg2); padding: 40px 32px; }
+.mvp-in { border: 1px solid rgba(0,200,120,0.25); }
+.mvp-out { border: 1px solid rgba(255,76,43,0.2); }
+
+.mvp-header {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.mvp-list { list-style: none; }
+.mvp-list li {
+  font-size: 13px;
+  color: var(--muted);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.mvp-list .check { color: var(--green); flex-shrink: 0; }
+.mvp-list .cross { color: var(--red); flex-shrink: 0; }
+
+/* ── CASHFLOW VISUAL ── */
+.cf-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 140px;
+  padding: 0 8px;
+  margin: 32px 0 16px;
+}
+
+.cf-bar-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
+.cf-bar { width: 100%; min-height: 4px; border-radius: 2px 2px 0 0; transition: height 0.5s; }
+.cf-bar.neg { background: linear-gradient(to top, #FF4C2B, #FF7043); }
+.cf-bar.pos { background: linear-gradient(to top, #00C878, #00E5A0); }
+.cf-bar-lbl { font-size: 9px; color: var(--muted); margin-top: 6px; font-family: var(--font-mono); }
+.cf-bar-val { font-size: 8px; color: var(--muted); margin-bottom: 2px; font-family: var(--font-mono); }
+
+/* ── SCALING PHASES ── */
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.scale-phase {
+  padding: 36px 24px;
+  background: var(--bg2);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-top: 3px solid;
+  position: relative;
+}
+
+.phase-num {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 900;
+  opacity: 0.08;
+  position: absolute;
+  top: 12px; right: 20px;
+  line-height: 1;
+}
+
+.phase-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.phase-title { font-size: 16px; font-weight: 600; margin-bottom: 20px; }
+
+.phase-list { list-style: none; }
+.phase-list li { font-size: 12px; color: var(--muted); padding: 4px 0; display: flex; gap: 6px; }
+.phase-list li::before { content: '·'; flex-shrink: 0; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 80px 60px 40px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold);
+}
+
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+  letter-spacing: 1px;
+  line-height: 2;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── MISC ── */
+.gold-line {
+  width: 60px; height: 2px;
+  background: var(--gold);
+  margin-bottom: 32px;
+}
+
+.note-box {
+  background: rgba(200,146,42,0.06);
+  border: 1px solid rgba(200,146,42,0.2);
+  padding: 20px 24px;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pnrr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pnrr-box { background: var(--bg2); padding: 32px 26px; border: 1px solid rgba(255,255,255,0.06); }
+.pnrr-box h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+.pnrr-box p, .pnrr-box ul { font-size: 13px; color: var(--muted); line-height: 1.8; }
+.pnrr-box ul { list-style: none; }
+.pnrr-box ul li { padding: 3px 0; }
+.pnrr-box ul li::before { content: '— '; color: var(--gold); }
+
+@media (max-width: 900px) {
+  section { padding: 80px 24px; }
+  .hero { padding: 100px 24px 60px; }
+  .card-grid-4, .hero-stats, .scale-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid-3, .pnrr-grid, .mvp-split { grid-template-columns: 1fr; }
+  .ebitda-split { grid-template-columns: 1fr; }
+  .action-item { grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; }
+  footer { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .lang-bar { padding: 12px 20px; }
+  .nav-dots { display: none; }
+}
+</style>
+</head>
+<body class="lang-it">
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <div class="brand-logo">CUBE ITALIA S.R.L.</div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-it" onclick="setLang('it')">IT — Italiano</button>
+    <button class="lang-btn" id="btn-cn" onclick="setLang('cn')">CN — 中文</button>
+  </div>
+</div>
+
+<!-- NAV DOTS -->
+<div class="nav-dots">
+  <button class="nav-dot active" data-section="hero" title="Home"></button>
+  <button class="nav-dot" data-section="traction" title="Traction"></button>
+  <button class="nav-dot" data-section="products" title="Products"></button>
+  <button class="nav-dot" data-section="mvp" title="MVP"></button>
+  <button class="nav-dot" data-section="economics" title="Economics"></button>
+  <button class="nav-dot" data-section="tiers" title="Tiers"></button>
+  <button class="nav-dot" data-section="partners" title="Partners"></button>
+  <button class="nav-dot" data-section="kpi" title="KPI"></button>
+  <button class="nav-dot" data-section="scale" title="Scale"></button>
+  <button class="nav-dot" data-section="action" title="Action"></button>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- HERO                                    -->
+<!-- ═══════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-eyebrow">Cube Italia S.R.L. · Prato · 2026</div>
+
+  <h1 class="hero-title it">La rete che porta<br><span class="accent">l'energia pulita</span><br>dove conta.</h1>
+  <h1 class="hero-title cn">将清洁能源输送到<br><span class="accent">最需要的地方</span></h1>
+
+  <p class="hero-sub it">Mobilità elettrica · Fotovoltaico · Storage · DTC Prato<br>MVP avvio <strong>01 Marzo 2026</strong></p>
+  <p class="hero-sub cn">电动出行 · 光伏发电 · 储能 · 普拉托直销中心<br>MVP启动 <strong>2026年3月1日</strong></p>
+
+  <div class="hero-tags">
+    <span class="tag it">56.000 € Investiti</span>
+    <span class="tag it">4 Partner Attivi</span>
+    <span class="tag it">Accordi Firmati</span>
+    <span class="tag it">Showroom Pronto</span>
+    <span class="tag cn">已投入 56,000 €</span>
+    <span class="tag cn">4个活跃合作伙伴</span>
+    <span class="tag cn">协议已签署</span>
+    <span class="tag cn">展厅已就绪</span>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-box">
+      <span class="stat-val">56k€</span>
+      <div class="stat-label it">Già investiti · fiere, viaggi, accordi, campionatura</div>
+      <div class="stat-label cn">已投入 · 展会、出差、协议、样品</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val">187k€</span>
+      <div class="stat-label it">Fatturato/mese a regime · scenario base</div>
+      <div class="stat-label cn">满产月营业额 · 基础场景</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val" style="color:var(--green)">+15.8k€</span>
+      <div class="stat-label it">EBITDA mensile a regime · dal mese 3</div>
+      <div class="stat-label cn">月度满产EBITDA · 从第3个月起</div>
+    </div>
+    <div class="stat-box">
+      <span class="stat-val" style="color:var(--orange)">Mese 3</span>
+      <div class="stat-label it">Break-even operativo dall'apertura</div>
+      <div class="stat-label cn">运营盈亏平衡 · 从开业起</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TRACTION                               -->
+<!-- ═══════════════════════════════════════ -->
+<section id="traction">
+  <div class="section-label it">01 — Partenza</div>
+  <div class="section-label cn">01 — 启动基础</div>
+
+  <h2 class="section-title it reveal">Non partiamo da zero.</h2>
+  <h2 class="section-title cn reveal">我们并非从零开始。</h2>
+
+  <p class="section-sub it reveal">Accordi reali, prodotti testati, un mercato che aspettava solo qualcuno capace di assemblarlo.</p>
+  <p class="section-sub cn reveal">真实协议，经测试产品，一个等待被整合的市场。</p>
+
+  <div class="card-grid-4 reveal">
+    <div class="card card-gold">
+      <span class="card-icon">💰</span>
+      <span class="card-num">56.000€</span>
+      <div class="card-title it">Già Investiti</div>
+      <div class="card-title cn">已投入</div>
+      <div class="card-desc it">Fiere (espositori) · viaggi fornitori · accordi · campionatura</div>
+      <div class="card-desc cn">展会（参展商）· 供应商出差 · 协议 · 样品采购</div>
+    </div>
+    <div class="card card-cyan">
+      <span class="card-icon">🏛</span>
+      <span class="card-num card-cyan" style="color:var(--cyan)">6</span>
+      <div class="card-title it">Fiere come Espositori</div>
+      <div class="card-title cn">参展展会</div>
+      <div class="card-desc it">Key Energy · Enersun · SolarExpo · BE-NEXT · Solaritaly · Greenexpo</div>
+      <div class="card-desc cn">Key Energy · Enersun · SolarExpo · BE-NEXT · Solaritaly · Greenexpo</div>
+    </div>
+    <div class="card card-green">
+      <span class="card-icon">🤝</span>
+      <span class="card-num" style="color:var(--green)">4</span>
+      <div class="card-title it">Partner con Accordi Attivi</div>
+      <div class="card-title cn">有效协议合作伙伴</div>
+      <div class="card-desc it">ITB Auto · Cubenergy · ZT-Tek · Ucanpower</div>
+      <div class="card-desc cn">ITB Auto · Cubenergy · ZT-Tek · Ucanpower</div>
+    </div>
+    <div class="card card-orange">
+      <span class="card-icon">🏪</span>
+      <span class="card-num" style="color:var(--orange)">Pronto</span>
+      <div class="card-title it">Lo Showroom DTC Prato</div>
+      <div class="card-title cn">普拉托直销展厅</div>
+      <div class="card-desc it">Allestito e operativo. Mancano solo A05 L6e e W300 Family L7e</div>
+      <div class="card-desc cn">已布置完毕并运营。仅等待A05 L6e和W300 Family L7e到位</div>
+    </div>
+  </div>
+
+  <div class="note-box reveal" style="margin-top:24px">
+    <strong style="color:var(--white)">🏪 <span class="it">Lo showroom DTC di Prato è allestito e operativo.</span><span class="cn">普拉托DTC展厅已布置完毕并正式运营。</span></strong><br>
+    <span class="it">I campioni di prodotti FV e BESS sono già presenti. Il personale commerciale è selezionato. Aspettiamo solo la consegna della A05 L6e e della W300 Family L7e per aprire il 1° Marzo.</span>
+    <span class="cn">FV和BESS产品样品已到位。销售人员已选定。等待A05 L6e和W300 Family L7e到货后于3月1日正式开业。</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PRODUCTS                               -->
+<!-- ═══════════════════════════════════════ -->
+<section id="products">
+  <div class="section-label it">02 — Prodotti</div>
+  <div class="section-label cn">02 — 产品线</div>
+
+  <h2 class="section-title it reveal">Residenziale, C&I, Corporate:<br>un solo showroom.</h2>
+  <h2 class="section-title cn reveal">住宅、商业、企业：<br>一个展厅全覆盖。</h2>
+
+  <p class="section-sub it reveal">Vendiamo quello che il mercato vuole oggi — e quello che vorrà domani.</p>
+  <p class="section-sub cn reveal">我们销售市场今日所需，以及明日所求。</p>
+
+  <div class="card-grid-3 reveal">
+    <div class="product-card">
+      <span class="product-badge badge-cyan">L6e · Quadriciclo</span>
+      <div class="product-name">DESNER A05</div>
+      <div class="product-cat it">MOBILITÀ ELETTRICA</div>
+      <div class="product-cat cn">电动出行</div>
+      <ul class="spec-list">
+        <li class="it">Patente AM · da 14 anni</li>
+        <li class="cn">AM驾照 · 14岁以上</li>
+        <li class="it">45 km/h · 120 km autonomia</li>
+        <li class="cn">45 km/h · 120 km续航</li>
+        <li class="it">EcoBonus fino a 3.000 €</li>
+        <li class="cn">生态奖励高达 3,000 €</li>
+        <li class="it">Demo in showroom</li>
+        <li class="cn">展厅实车展示</li>
+      </ul>
+      <div class="price-tag it">da 8.415 €</div>
+      <div class="price-tag cn">起价 8,415 €</div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-badge badge-cyan">L7e · Quadriciclo</span>
+      <div class="product-name">DESNER W300 FAMILY</div>
+      <div class="product-cat it">MOBILITÀ ELETTRICA</div>
+      <div class="product-cat cn">电动出行</div>
+      <ul class="spec-list">
+        <li class="it">90 km/h · 215 km autonomia</li>
+        <li class="cn">90 km/h · 215 km续航</li>
+        <li>Android Auto / CarPlay</li>
+        <li class="it">EcoBonus fino a 4.000 €</li>
+        <li class="cn">生态奖励高达 4,000 €</li>
+        <li class="it">Demo in showroom</li>
+        <li class="cn">展厅实车展示</li>
+      </ul>
+      <div class="price-tag it">da 16.991 €</div>
+      <div class="price-tag cn">起价 16,991 €</div>
+    </div>
+
+    <div class="product-card">
+      <span class="product-badge badge-green">B2C · C&I · Utility</span>
+      <div class="product-name">FV + BESS STORAGE</div>
+      <div class="product-cat it">ENERGIA & ACCUMULO</div>
+      <div class="product-cat cn">能源与储能</div>
+      <ul class="spec-list">
+        <li class="it">FV 5-10 kWp residenziale</li>
+        <li class="cn">住宅FV 5-10 kWp</li>
+        <li class="it">C&I 20-50 kWp industriale</li>
+        <li class="cn">工业C&I 20-50 kWp</li>
+        <li class="it">BESS container fino a MW</li>
+        <li class="cn">BESS集装箱至MW级</li>
+        <li class="it">Dropshipping — no magazzino</li>
+        <li class="cn">一件代发 — 无需仓库</li>
+      </ul>
+      <div class="price-tag" style="color:var(--green)">GP 16–19% / impianto</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MVP                                    -->
+<!-- ═══════════════════════════════════════ -->
+<section id="mvp">
+  <div class="section-label it">03 — Perimetro MVP</div>
+  <div class="section-label cn">03 — MVP范围</div>
+
+  <h2 class="section-title it reveal">Cosa facciamo adesso.</h2>
+  <h2 class="section-title cn reveal">我们现在做什么。</h2>
+
+  <p class="section-sub it reveal">Focus assoluto sul Punto Fotovoltaico Prato. MVP = Minimum Viable Product.</p>
+  <p class="section-sub cn reveal">完全聚焦于普拉托光伏中心。MVP = 最小可行产品。</p>
+
+  <div class="mvp-split reveal">
+    <div class="mvp-box mvp-in">
+      <div class="mvp-header" style="color:var(--green)">✅ <span class="it">DENTRO il MVP</span><span class="cn">MVP 范围内</span></div>
+      <ul class="mvp-list">
+        <li><span class="check">✓</span><span class="it">1 allestimento showroom — Prato flagship</span><span class="cn">1个展厅布置 — 普拉托旗舰店</span></li>
+        <li><span class="check">✓</span><span class="it">Dropshipping: merce da partner in conto vendita</span><span class="cn">一件代发：合作伙伴寄售货物</span></li>
+        <li><span class="check">✓</span><span class="it">Accordi Ucanpower (residenz.) + ZTTEk/VILION (aziende) + CUBE (retrofit)</span><span class="cn">Ucanpower协议（住宅）+ ZTTEk/VILION（企业）+ CUBE（改造）</span></li>
+        <li><span class="check">✓</span><span class="it">Clienti B2C residenziali via rete Promotori SKILL 1-2</span><span class="cn">B2C住宅客户（通过SKILL 1-2推广网络）</span></li>
+        <li><span class="check">✓</span><span class="it">Clienti Aziendali / C&I via rete promotori SKILL 2-3</span><span class="cn">企业/C&I客户（通过SKILL 2-3推广网络）</span></li>
+        <li><span class="check">✓</span><span class="it">Clienti SPV / istituzionali (SRL gestisce direttamente)</span><span class="cn">SPV/机构客户（SRL直接管理）</span></li>
+        <li><span class="check">✓</span><span class="it">Fatturazione, contratti, marginalità — tutto in capo SRL</span><span class="cn">开票、合同、利润 — 均由SRL负责</span></li>
+        <li><span class="check">✓</span><span class="it">Accordi finanziamento con istituti di credito</span><span class="cn">与金融机构签署融资协议</span></li>
+      </ul>
+    </div>
+
+    <div class="mvp-box mvp-out">
+      <div class="mvp-header" style="color:var(--red)">🚫 <span class="it">FUORI dal MVP</span><span class="cn">MVP 范围外</span></div>
+      <ul class="mvp-list">
+        <li><span class="cross">✗</span><span class="it">Import diretto da Cina (dogana, container: fase 2+)</span><span class="cn">直接从中国进口（海关、集装箱：第二阶段+）</span></li>
+        <li><span class="cross">✗</span><span class="it">Apertura nuovi showroom (replica solo dopo break-even)</span><span class="cn">开设新展厅（仅在盈亏平衡后复制）</span></li>
+        <li><span class="cross">✗</span><span class="it">Magazzino proprio di grandi dimensioni</span><span class="cn">大型自有仓库</span></li>
+        <li><span class="cross">✗</span><span class="it">Richiesta finanziamento €1,88M (fase scaling)</span><span class="cn">申请188万€融资（扩张阶段）</span></li>
+        <li><span class="cross">✗</span><span class="it">Unità dedicata ricerca partner altre città</span><span class="cn">专门寻找其他城市合作伙伴的团队</span></li>
+        <li><span class="cross">✗</span><span class="it">IPO / new co sviluppo VPP come HUB BESS</span><span class="cn">以VPP中心为目的的IPO/新公司（BESS）</span></li>
+        <li><span class="cross">✗</span><span class="it">Robotica, droni, sistemi stand-alone irrigazione</span><span class="cn">机器人、无人机、独立灌溉系统</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ECONOMICS                              -->
+<!-- ═══════════════════════════════════════ -->
+<section id="economics">
+  <div class="section-label it">04 — Economics MVP</div>
+  <div class="section-label cn">04 — MVP经济模型</div>
+
+  <h2 class="section-title it reveal">Per punto vendita.</h2>
+  <h2 class="section-title cn reveal">每个销售点。</h2>
+
+  <p class="section-sub it reveal">Un solo showroom. Piano economico dettagliato.</p>
+  <p class="section-sub cn reveal">单一展厅。详细财务计划。</p>
+
+  <!-- EBITDA -->
+  <div class="ebitda-split reveal">
+    <div class="ebitda-block ebitda-neg">
+      <div class="ebitda-label it">EBITDA Mesi 1–2</div>
+      <div class="ebitda-label cn">第1-2个月EBITDA</div>
+      <div class="ebitda-val">–16.050€</div>
+      <div class="ebitda-note it">Fase di avvio — atteso e pianificato</div>
+      <div class="ebitda-note cn">启动阶段 — 预期且已计划</div>
+    </div>
+    <div class="ebitda-block ebitda-pos">
+      <div class="ebitda-label it">EBITDA a Regime (mese 3+)</div>
+      <div class="ebitda-label cn">满产EBITDA（第3个月+）</div>
+      <div class="ebitda-val">+15.810€</div>
+      <div class="ebitda-note it">OPEX 16.050€/mese completamente coperto</div>
+      <div class="ebitda-note cn">月OPEX 16,050€完全覆盖</div>
+    </div>
+  </div>
+
+  <!-- KEY METRICS -->
+  <div class="reveal" style="margin-bottom:48px">
+    <div class="metric-row">
+      <div class="metric-bar" style="background:var(--gold)"></div>
+      <div class="metric-label">
+        <div class="mname it">Investito già oggi</div>
+        <div class="mname cn">已投入今日</div>
+        <div class="msub it">fiere · viaggi fornitori · campionatura · web app · già pagato</div>
+        <div class="msub cn">展会 · 供应商出差 · 样品采购 · 网页应用 · 已支付</div>
+      </div>
+      <div class="metric-val" style="color:var(--gold)">56.000€</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-bar" style="background:var(--cyan)"></div>
+      <div class="metric-label">
+        <div class="mname it">Fatturato/mese a regime</div>
+        <div class="mname cn">满产月营业额</div>
+        <div class="msub it">4 B2C + 1 C&I trifase + 2 C&I industriale + 2 Desner</div>
+        <div class="msub cn">4个B2C + 1个C&I三相 + 2个C&I工业 + 2台Desner</div>
+      </div>
+      <div class="metric-val" style="color:var(--cyan)">187.000€</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-bar" style="background:var(--orange)"></div>
+      <div class="metric-label">
+        <div class="mname it">Break-even operativo</div>
+        <div class="mname cn">运营盈亏平衡</div>
+        <div class="msub it">dall'apertura showroom 01 Marzo 2026</div>
+        <div class="msub cn">从展厅2026年3月1日开业起算</div>
+      </div>
+      <div class="metric-val" style="color:var(--orange)">Mese 3</div>
+    </div>
+    <div class="metric-row">
+      <div class="metric-bar" style="background:var(--green)"></div>
+      <div class="metric-label">
+        <div class="mname it">EBITDA Anno 1</div>
+        <div class="mname cn">第1年EBITDA</div>
+        <div class="msub it">proiezione conservativa · scenario base · amm. compresi</div>
+        <div class="msub cn">保守预测 · 基础场景 · 含折旧</div>
+      </div>
+      <div class="metric-val" style="color:var(--gold)">135.720€</div>
+    </div>
+  </div>
+
+  <!-- CASHFLOW CHART -->
+  <div class="reveal">
+    <div class="section-label it" style="margin-bottom:16px">Cashflow mensile — Anno 1</div>
+    <div class="section-label cn" style="margin-bottom:16px">月度现金流 — 第1年</div>
+    <div class="cf-bars" id="cfbars"></div>
+  </div>
+
+  <!-- P&L TABLE -->
+  <div class="reveal" style="margin-top:48px">
+    <div class="section-label it" style="margin-bottom:16px">P&L Mensile — Scenario Base</div>
+    <div class="section-label cn" style="margin-bottom:16px">月度损益 — 基础场景</div>
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th class="it">Linea di Ricavo</th><th class="cn">收入业务线</th>
+          <th class="it">Fatturato</th><th class="cn">营业额</th>
+          <th class="it">Gross Profit</th><th class="cn">毛利润</th>
+          <th class="it">Margine</th><th class="cn">利润率</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="it">FV B2C (4 impianti × 9.800€)</td><td class="cn">住宅FV B2C（4个项目 × 9,800€）</td>
+          <td class="val">39.200€</td><td class="val">39,200€</td>
+          <td class="val-gold">7.600€</td><td class="val-gold">7,600€</td>
+          <td class="val" style="color:var(--muted)">19.4%</td><td class="val" style="color:var(--muted)">19.4%</td>
+        </tr>
+        <tr>
+          <td class="it">C&I Trifase (1 × 18.000€)</td><td class="cn">C&I三相（1个 × 18,000€）</td>
+          <td class="val">18.000€</td><td class="val">18,000€</td>
+          <td class="val-gold">3.060€</td><td class="val-gold">3,060€</td>
+          <td class="val" style="color:var(--muted)">17%</td><td class="val" style="color:var(--muted)">17%</td>
+        </tr>
+        <tr>
+          <td class="it">C&I Industriale (2 × 50.000€)</td><td class="cn">工业C&I（2个 × 50,000€）</td>
+          <td class="val">100.000€</td><td class="val">100,000€</td>
+          <td class="val-gold">16.400€</td><td class="val-gold">16,400€</td>
+          <td class="val" style="color:var(--muted)">16.4%</td><td class="val" style="color:var(--muted)">16.4%</td>
+        </tr>
+        <tr>
+          <td class="it">Desner (2 quadricicli × 15.000€)</td><td class="cn">Desner（2台四轮车 × 15,000€）</td>
+          <td class="val">30.000€</td><td class="val">30,000€</td>
+          <td class="val-gold">4.800€</td><td class="val-gold">4,800€</td>
+          <td class="val" style="color:var(--muted)">16%</td><td class="val" style="color:var(--muted)">16%</td>
+        </tr>
+        <tr class="total-row">
+          <td class="it"><strong>TOTALE</strong></td><td class="cn"><strong>合计</strong></td>
+          <td class="val-gold">187.200€</td><td class="val-gold">187,200€</td>
+          <td class="val-gold">31.860€</td><td class="val-gold">31,860€</td>
+          <td class="val-gold">17%</td><td class="val-gold">17%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- TIERS                                  -->
+<!-- ═══════════════════════════════════════ -->
+<section id="tiers">
+  <div class="section-label it">05 — Segmenti di Clientela</div>
+  <div class="section-label cn">05 — 客户细分</div>
+
+  <h2 class="section-title it reveal">Tre tier. Tre livelli<br>di promotore.</h2>
+  <h2 class="section-title cn reveal">三个层级。三个<br>推广员级别。</h2>
+
+  <div class="card-grid-3 reveal">
+    <!-- TIER 1 -->
+    <div class="tier-card">
+      <div class="tier-stripe tier-stripe-green"></div>
+      <span class="tier-badge" style="background:rgba(0,200,120,0.1);color:var(--green);border:1px solid rgba(0,200,120,0.3)">TIER 1</span>
+      <div class="tier-title it">Residenziale B2C</div>
+      <div class="tier-title cn">住宅 B2C</div>
+      <div class="tier-sub it" style="color:var(--green)">PROMOTORE: SKILL 1-2 ANPTE</div>
+      <div class="tier-sub cn" style="color:var(--green)">推广员：SKILL 1-2 ANPTE</div>
+
+      <div class="detail-section">
+        <div class="dlabel it" style="color:var(--green)">Chi</div>
+        <div class="dlabel cn" style="color:var(--green)">客户</div>
+        <div class="dval it">Abitazioni singole, condomini, AUC</div>
+        <div class="dval cn">单户住宅、公寓楼、共同自用（AUC）</div>
+
+        <div class="dlabel it" style="color:var(--green)">Prodotti</div>
+        <div class="dlabel cn" style="color:var(--green)">产品</div>
+        <div class="dval it">FV 5-10 kWp + BESS LV monofase · Scooter/L6 EV + Wallbox · Conto Termico 3.0</div>
+        <div class="dval cn">FV 5-10 kWp + BESS LV单相 · 踏板车/L6 EV + 壁充 · 热能账户3.0</div>
+
+        <div class="dlabel it" style="color:var(--green)">Leva</div>
+        <div class="dlabel cn" style="color:var(--green)">销售杠杆</div>
+        <div class="dval it">Rata < risparmio carburante · Bolletta quasi zero</div>
+        <div class="dval cn">月供 < 节省燃料费 · 电费几乎为零</div>
+      </div>
+
+      <div class="commission-box" style="border-color:var(--green);color:var(--green)">
+        <span class="it">6% B2C al procacciatore-promotore energetico</span>
+        <span class="cn">6% B2C 支付给业务员-能源推广员</span>
+      </div>
+    </div>
+
+    <!-- TIER 2 -->
+    <div class="tier-card">
+      <div class="tier-stripe tier-stripe-cyan"></div>
+      <span class="tier-badge" style="background:rgba(0,184,212,0.1);color:var(--cyan);border:1px solid rgba(0,184,212,0.3)">TIER 2</span>
+      <div class="tier-title it">PMI / C&I</div>
+      <div class="tier-title cn">中小企业 / C&I</div>
+      <div class="tier-sub it" style="color:var(--cyan)">PROMOTORE: SKILL 2-3 ANPTE</div>
+      <div class="tier-sub cn" style="color:var(--cyan)">推广员：SKILL 2-3 ANPTE</div>
+
+      <div class="detail-section">
+        <div class="dlabel it" style="color:var(--cyan)">Chi</div>
+        <div class="dlabel cn" style="color:var(--cyan)">客户</div>
+        <div class="dval it">Imprese commerciali/industriali · CER attive · General Contractor</div>
+        <div class="dval cn">商业/工业企业 · 活跃CER · 总承包商</div>
+
+        <div class="dlabel it" style="color:var(--cyan)">Prodotti</div>
+        <div class="dlabel cn" style="color:var(--cyan)">产品</div>
+        <div class="dval it">FV 20-50 kWp trifase + HV 40-100 kWh · Cabinet ZT-Tek · EV L7 · BESS > 1MWh</div>
+        <div class="dval cn">FV 20-50 kWp三相 + HV 40-100 kWh · ZT-Tek机柜 · EV L7 · BESS > 1MWh</div>
+
+        <div class="dlabel it" style="color:var(--cyan)">Leva</div>
+        <div class="dlabel cn" style="color:var(--cyan)">销售杠杆</div>
+        <div class="dval it">Peak Shaving · ROI 3-5 anni · CER e AUC · PPA locale</div>
+        <div class="dval cn">峰值削减 · ROI 3-5年 · CER和AUC · 本地PPA</div>
+      </div>
+
+      <div class="commission-box" style="border-color:var(--cyan);color:var(--cyan)">
+        <span class="it">5% B2B al procacciatore / promotore</span>
+        <span class="cn">5% B2B 支付给业务员/推广员</span>
+      </div>
+    </div>
+
+    <!-- TIER 3 -->
+    <div class="tier-card">
+      <div class="tier-stripe tier-stripe-gold"></div>
+      <span class="tier-badge" style="background:rgba(200,146,42,0.1);color:var(--gold);border:1px solid rgba(200,146,42,0.3)">TIER 3</span>
+      <div class="tier-title it">SPV / Istituzionali</div>
+      <div class="tier-title cn">SPV / 机构</div>
+      <div class="tier-sub it" style="color:var(--gold)">PROMOTORE: SKILL 3 + SRL DIRETTA</div>
+      <div class="tier-sub cn" style="color:var(--gold)">推广员：SKILL 3 + SRL直营</div>
+
+      <div class="detail-section">
+        <div class="dlabel it" style="color:var(--gold)">Chi</div>
+        <div class="dlabel cn" style="color:var(--gold)">客户</div>
+        <div class="dval it">SPV fotovoltaici · EPC · Fondazioni · CER / AUC</div>
+        <div class="dval cn">光伏SPV · EPC · 基金会 · CER/AUC</div>
+
+        <div class="dlabel it" style="color:var(--gold)">Prodotti</div>
+        <div class="dlabel cn" style="color:var(--gold)">产品</div>
+        <div class="dval it">Cubenergy Container BESS (100 PCS, 233 kWh+) · Sistemi MW-scale · PPA lungo periodo</div>
+        <div class="dval cn">Cubenergy集装箱BESS（100 PCS，233 kWh+）· MW级系统 · 长期PPA</div>
+
+        <div class="dlabel it" style="color:var(--gold)">Leva</div>
+        <div class="dlabel cn" style="color:var(--gold)">销售杠杆</div>
+        <div class="dval it">Arbitraggio energia · Dispacciamento Terna · EPC contractor + O&M</div>
+        <div class="dval cn">能源套利 · Terna调度 · EPC承包商 + 托管运维</div>
+      </div>
+
+      <div class="commission-box" style="border-color:var(--gold);color:var(--gold)">
+        <span class="it">Fee consulenza + quota EPC (negoziato caso per caso)</span>
+        <span class="cn">咨询费 + EPC分成（逐案谈判）</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PARTNERS                               -->
+<!-- ═══════════════════════════════════════ -->
+<section id="partners">
+  <div class="section-label it">06 — Fornitori Partner</div>
+  <div class="section-label cn">06 — 合作供应商</div>
+
+  <h2 class="section-title it reveal">Partner validati.<br>Accordi attivi.</h2>
+  <h2 class="section-title cn reveal">已验证合作伙伴。<br>有效协议。</h2>
+
+  <div class="card-grid-2 reveal">
+    <div class="partner-card" style="border-top:3px solid var(--cyan)">
+      <div class="partner-name" style="color:var(--cyan)">CUBENERGY</div>
+      <div class="partner-tier it">Tier 3 SPV / Utility</div>
+      <div class="partner-tier cn">第三层 SPV/公共事业</div>
+      <ul class="partner-points">
+        <li class="it">BESS container > 1MWh · Sistemi MW-scale · PPA lungo periodo</li>
+        <li class="cn">BESS集装箱 > 1MWh · MW级系统 · 长期PPA</li>
+        <li class="it">EPC contractor · Arbitraggi · CER-Microgrid</li>
+        <li class="cn">EPC承包商 · 套利 · CER-微网</li>
+      </ul>
+      <div class="partner-status it">✅ Accordo distribuzione Italia firmato Feb 2026</div>
+      <div class="partner-status cn">✅ 2026年2月已签署意大利分销协议</div>
+      <div class="partner-margin it">Margine: Fee EPC + quota installazione (caso per caso)</div>
+      <div class="partner-margin cn">利润率：EPC费+安装费（逐案而定）</div>
+    </div>
+
+    <div class="partner-card" style="border-top:3px solid var(--green)">
+      <div class="partner-name" style="color:var(--green)">UCANPOWER</div>
+      <div class="partner-tier it">Tier 1 FV B2C + BESS Residenziale</div>
+      <div class="partner-tier cn">第一层 FV B2C + BESS住宅</div>
+      <ul class="partner-points">
+        <li class="it">FV residenziale 5-10 kWp · FV trifase 20-50 kWp</li>
+        <li class="cn">住宅FV 5-10 kWp · 三相FV 20-50 kWp</li>
+        <li class="it">BESS LV monofase · Wallbox B2C · Assistenza Criobit</li>
+        <li class="cn">BESS LV单相 · B2C壁充 · Criobit售后服务</li>
+      </ul>
+      <div class="partner-status it">✅ Accordo quadro distribuzione · attivo</div>
+      <div class="partner-status cn">✅ 框架分销协议 · 有效</div>
+      <div class="partner-margin it">Margine: 19.4% GP medio su B2C residenziale</div>
+      <div class="partner-margin cn">利润率：B2C住宅平均GP 19.4%</div>
+    </div>
+
+    <div class="partner-card" style="border-top:3px solid var(--cyan)">
+      <div class="partner-name" style="color:var(--cyan)">ZT-TEK / VILION</div>
+      <div class="partner-tier it">Tier 1-2 FV C&I</div>
+      <div class="partner-tier cn">第1-2层 FV C&I</div>
+      <ul class="partner-points">
+        <li class="it">Cabinet 100 PCS (233 kWh+) · Cabinet C&I · Autoconsumo Wallbox</li>
+        <li class="cn">100 PCS机柜（233 kWh+）· C&I机柜 · 自用壁充</li>
+        <li class="it">Impianti industriali chiavi in mano</li>
+        <li class="cn">工业交钥匙工程</li>
+      </ul>
+      <div class="partner-status it">✅ Accordo dropshipping conto vendita Mar 2026</div>
+      <div class="partner-status cn">✅ 2026年3月寄售一件代发协议</div>
+      <div class="partner-margin it">Margine: 17% GP medio su C&I trifase</div>
+      <div class="partner-margin cn">利润率：C&I三相平均GP 17%</div>
+    </div>
+
+    <div class="partner-card" style="border-top:3px solid var(--gold)">
+      <div class="partner-name" style="color:var(--gold)">ITB AUTO — DESNER</div>
+      <div class="partner-tier it">Mobilità Elettrica L6e / L7e</div>
+      <div class="partner-tier cn">电动出行 L6e/L7e</div>
+      <ul class="partner-points">
+        <li class="it">A05 L6e: 45 km/h · 120 km · da 9.900€</li>
+        <li class="cn">A05 L6e：45 km/h · 120 km · 起价9,900€</li>
+        <li class="it">W300 Family L7e: 90 km/h · 215 km · da 19.990€</li>
+        <li class="cn">W300 Family L7e：90 km/h · 215 km · 起价19,990€</li>
+        <li class="it">EcoBonus 2026: fino a 4.000€ con rottamazione</li>
+        <li class="cn">2026生态奖励：以旧换新高达4,000€</li>
+      </ul>
+      <div class="partner-status it">✅ Accordo rivenditore SC1 −10% · demo −15% · attivo</div>
+      <div class="partner-status cn">✅ SC1经销商协议-10% · 展示车-15% · 有效</div>
+      <div class="partner-margin it">Margine: SC1 10% base → 14% a 12 pz/anno · +2% premio trim.</div>
+      <div class="partner-margin cn">利润率：SC1基础10% → 年12台达14% · +2%季度奖励</div>
+    </div>
+  </div>
+
+  <div class="note-box reveal" style="margin-top:24px">
+    <strong style="color:var(--white)">📦 <span class="it">REGOLA MVP — Dropshipping:</span><span class="cn">MVP规则 — 一件代发：</span></strong><br>
+    <span class="it">La merce viaggia direttamente dal magazzino del fornitore partner al cantiere del cliente. Cube Italia S.R.L. incassa la differenza tra prezzo cliente e costo fornitore. Nessuna giacenza di magazzino per i prodotti dropship (FV+BESS). Desner: acquisto diretto.</span>
+    <span class="cn">货物直接从合作供应商仓库运往客户工地。Cube Italia S.R.L.收取客户价与供应商成本之差。FV+BESS产品不持有库存。Desner：直购后按SC1价格转卖。</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- KPI                                    -->
+<!-- ═══════════════════════════════════════ -->
+<section id="kpi">
+  <div class="section-label it">07 — KPI di Monitoraggio</div>
+  <div class="section-label cn">07 — KPI监控</div>
+
+  <h2 class="section-title it reveal">Indicatori economici<br>e commerciali.</h2>
+  <h2 class="section-title cn reveal">经济与商业<br>监控指标。</h2>
+
+  <p class="section-sub it reveal">Soglie di alert · revisione settimanale · report mensile ai soci.</p>
+  <p class="section-sub cn reveal">预警阈值 · 每周评审 · 每月向股东报告。</p>
+
+  <div class="reveal">
+    <table class="kpi-table">
+      <thead>
+        <tr>
+          <th class="it">KPI</th><th class="cn">KPI指标</th>
+          <th class="it">Freq.</th><th class="cn">频率</th>
+          <th class="it">Target Mese 1</th><th class="cn">第1月目标</th>
+          <th class="it">Target Mese 3</th><th class="cn">第3月目标</th>
+          <th class="it">Alert</th><th class="cn">预警</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="kpi-name it">Contratti B2C chiusi / mese</td><td class="kpi-name cn">每月B2C合同成交数</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">≥ 2</td><td class="kpi-t1">≥ 2</td>
+          <td class="kpi-t3">≥ 4</td><td class="kpi-t3">≥ 4</td>
+          <td class="kpi-alert it">< 2 → revisione lead gen</td><td class="kpi-alert cn">< 2 → 修订线索获取</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">Contratti C&I chiusi / mese</td><td class="kpi-name cn">每月C&I合同成交数</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">0 (cost.)</td><td class="kpi-t1">0</td>
+          <td class="kpi-t3">≥ 3</td><td class="kpi-t3">≥ 3</td>
+          <td class="kpi-alert it">< 2 da mese 4 → alert pipeline</td><td class="kpi-alert cn">第4月起< 2 → 管道预警</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">Quadricicli Desner venduti</td><td class="kpi-name cn">Desner四轮车销量</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">≥ 1</td><td class="kpi-t1">≥ 1</td>
+          <td class="kpi-t3">≥ 2</td><td class="kpi-t3">≥ 2</td>
+          <td class="kpi-alert it">< 6 trim → SC1 rimane 10%</td><td class="kpi-alert cn">< 6季度 → SC1维持10%</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">Appuntamenti fissati (Inside S.)</td><td class="kpi-name cn">内销预约数</td>
+          <td class="it">Settimanale</td><td class="cn">每周</td>
+          <td class="kpi-t1">≥ 8/sett.</td><td class="kpi-t1">≥ 8/week</td>
+          <td class="kpi-t3">≥ 20/sett.</td><td class="kpi-t3">≥ 20/week</td>
+          <td class="kpi-alert it">< 8 → rivedere lead gen</td><td class="kpi-alert cn">< 8 → 修订线索获取</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">Fatturato mensile realizzato</td><td class="kpi-name cn">月度实现营业额</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">≥ 15.000€</td><td class="kpi-t1">≥ 15,000€</td>
+          <td class="kpi-t3">≥ 100.000€</td><td class="kpi-t3">≥ 100,000€</td>
+          <td class="kpi-alert it">< 50k a regime → alert</td><td class="kpi-alert cn">满产期< 50k → 预警</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">Gross Profit mensile</td><td class="kpi-name cn">月度毛利润</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">≥ 5.000€</td><td class="kpi-t1">≥ 5,000€</td>
+          <td class="kpi-t3">≥ 31.860€</td><td class="kpi-t3">≥ 31,860€</td>
+          <td class="kpi-alert it">< 12k → rivedere pipeline C&I</td><td class="kpi-alert cn">< 12,000 → 修订C&I管道</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">EBITDA mensile</td><td class="kpi-name cn">月度EBITDA</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">neg. (ok)</td><td class="kpi-t1">—</td>
+          <td class="kpi-t3">+15.810€</td><td class="kpi-t3">+15,810€</td>
+          <td class="kpi-alert it">neg. dopo mese 4 → riunione</td><td class="kpi-alert cn">第4月后负值 → 召开会议</td>
+        </tr>
+        <tr>
+          <td class="kpi-name it">Promotori ANPTE attivi SKILL 1+</td><td class="kpi-name cn">活跃ANPTE SKILL 1+推广员</td>
+          <td class="it">Mensile</td><td class="cn">月度</td>
+          <td class="kpi-t1">≥ 3</td><td class="kpi-t1">≥ 3</td>
+          <td class="kpi-t3">≥ 10</td><td class="kpi-t3">≥ 10</td>
+          <td class="kpi-alert it">< 5 → rivedere onboarding ANPTE</td><td class="kpi-alert cn">< 5 → 修订ANPTE入职</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- SCALE                                  -->
+<!-- ═══════════════════════════════════════ -->
+<section id="scale">
+  <div class="section-label it">08 — Scalabilità</div>
+  <div class="section-label cn">08 — 可扩展性</div>
+
+  <h2 class="section-title it reveal">Da Prato all'Italia.</h2>
+  <h2 class="section-title cn reveal">从普拉托到全意大利。</h2>
+
+  <p class="section-sub it reveal">Replica solo dopo 3 mesi consecutivi profittevoli · 8 città entro fine 2027.</p>
+  <p class="section-sub cn reveal">连续3个月盈利后复制 · 2027年底前进驻8个城市。</p>
+
+  <div class="scale-grid reveal">
+    <div class="scale-phase" style="border-color:var(--cyan)">
+      <div class="phase-num" style="color:var(--cyan)">1</div>
+      <div class="phase-label" style="color:var(--cyan)">Attuale / 当前</div>
+      <div class="phase-title it">MVP — Prato DTC</div>
+      <div class="phase-title cn">MVP — 普拉托直销</div>
+      <ul class="phase-list">
+        <li class="it">1 DTC Prato operativo</li><li class="cn">1个普拉托直销运营</li>
+        <li class="it">CAPEX ~82.600 €</li><li class="cn">资本支出 ~82,600 €</li>
+        <li class="it">Dropshipping no magazzino</li><li class="cn">一件代发无库存</li>
+        <li class="it">EBITDA: +15.810 €/mese</li><li class="cn">EBITDA：+15,810 €/月</li>
+        <li class="it">Break-even operativo mese 3</li><li class="cn">第3个月运营盈亏平衡</li>
+      </ul>
+    </div>
+
+    <div class="scale-phase" style="border-color:var(--gold)">
+      <div class="phase-num" style="color:var(--gold)">2</div>
+      <div class="phase-label" style="color:var(--gold)">Mese 7-12 / 第7-12个月</div>
+      <div class="phase-title it">Scaling</div>
+      <div class="phase-title cn">扩展</div>
+      <ul class="phase-list">
+        <li class="it">Replica 2° showroom (Firenze/Bologna)</li><li class="cn">复制第2个展厅（佛罗伦萨/博洛尼亚）</li>
+        <li class="it">CAPEX Fase 2: ~65.000 €</li><li class="cn">第二阶段资本支出：~65,000 €</li>
+        <li class="it">Promotori ANPTE SKILL 2 attivi</li><li class="cn">ANPTE SKILL 2推广员活跃</li>
+        <li class="it">Target: 50.000€ EBITDA/mese</li><li class="cn">目标：月EBITDA 50,000€</li>
+      </ul>
+    </div>
+
+    <div class="scale-phase" style="border-color:var(--orange)">
+      <div class="phase-num" style="color:var(--orange)">3</div>
+      <div class="phase-label" style="color:var(--orange)">Anno 2 · 2027 / 第2年</div>
+      <div class="phase-title it">Espansione</div>
+      <div class="phase-title cn">扩张</div>
+      <ul class="phase-list">
+        <li class="it">4-6 DTC attivi (IT Nord-Centro)</li><li class="cn">4-6个直销运营（意大利中北部）</li>
+        <li class="it">Licenza IPP Virtuale ARERA</li><li class="cn">ARERA虚拟IPP许可证运营</li>
+        <li class="it">Target: 10 DTC SRL attivi fine 2027</li><li class="cn">目标：2027年底10个直销SRL运营</li>
+        <li class="it">Fatturato consolidato > 10M€</li><li class="cn">合并营业额 > 1,000万€</li>
+      </ul>
+    </div>
+
+    <div class="scale-phase" style="border-color:#B39DDB">
+      <div class="phase-num" style="color:#B39DDB">4</div>
+      <div class="phase-label" style="color:#B39DDB">Anno 3+ / 第3年+</div>
+      <div class="phase-title it">Ecosistema</div>
+      <div class="phase-title cn">生态系统</div>
+      <ul class="phase-list">
+        <li class="it">New Co + licenza IPP nazionale</li><li class="cn">新公司+全国层面IPP许可证</li>
+        <li class="it">Accordo white-label piattaforma SKILL</li><li class="cn">SKILL平台白牌协议</li>
+        <li class="it">Import diretto CN → warehouse IT</li><li class="cn">中国直接进口 → 意大利仓库</li>
+        <li class="it">Target: 50 DTC fine 2028 · >50M€</li><li class="cn">目标：2028年底50个直销 · >5,000万€</li>
+        <li class="it">IPO o cessione industriale</li><li class="cn">IPO或产业并购</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ACTION PLAN                            -->
+<!-- ═══════════════════════════════════════ -->
+<section id="action">
+  <div class="section-label it">09 — Action Plan Immediato</div>
+  <div class="section-label cn">09 — 即时行动计划</div>
+
+  <h2 class="section-title it reveal">Da completare entro<br>4 Marzo 2026.</h2>
+  <h2 class="section-title cn reveal">须于2026年<br>3月4日前完成。</h2>
+
+  <p class="section-sub it reveal">Responsabile: Dir. Commerciale + Product Manager</p>
+  <p class="section-sub cn reveal">责任人：商务总监 + 产品经理</p>
+
+  <div class="reveal">
+    <div class="action-item" style="background:var(--bg3);font-family:var(--font-mono);font-size:10px;letter-spacing:1px">
+      <div class="action-cell" style="color:var(--gold)"><span class="it">ENTRO</span><span class="cn">截止</span></div>
+      <div class="action-cell" style="color:var(--cyan)"><span class="it">CHI</span><span class="cn">负责人</span></div>
+      <div class="action-cell" style="color:var(--white)"><span class="it">AZIONE</span><span class="cn">行动事项</span></div>
+      <div class="action-cell" style="justify-content:center;color:var(--muted)"><span class="it">PRIORITÀ</span><span class="cn">优先级</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">01 Mar</div>
+      <div class="action-cell action-who">Dir. Comm.</div>
+      <div class="action-cell action-task"><span class="it">Firma contratto affitto showroom Prato · sopralluogo e allestimento</span><span class="cn">签署普拉托展厅租约 · 现场检查和布置</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">01 Mar</div>
+      <div class="action-cell action-who">Dir. Comm.</div>
+      <div class="action-cell action-task"><span class="it">Acquisto 2 demo Desner (A05 + W300 Family) · pagamento ITB Auto 25.406€</span><span class="cn">购买2台Desner展示车 · 支付ITB Auto 25,406€</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">01 Mar</div>
+      <div class="action-cell action-who"><span class="it">Entrambi</span><span class="cn">双方</span></div>
+      <div class="action-cell action-task"><span class="it">Onboarding 3 Inside Sales/Back Office (PT#1, PT#2, PT#3) · briefing ruoli</span><span class="cn">3名内部销售/商务后台入职（PT#1、PT#2、PT#3）· 商业角色简报</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">01 Mar</div>
+      <div class="action-cell action-who">Prod. Mgr</div>
+      <div class="action-cell action-task"><span class="it">Kickoff sviluppo Web App SKILL ANPTE (AI-assisted) · briefing dev · 12.000€</span><span class="cn">启动SKILL ANPTE网页应用开发（AI辅助）· 开发商简报 · 12,000€</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">05 Mar</div>
+      <div class="action-cell action-who">Dir. Comm.</div>
+      <div class="action-cell action-task"><span class="it">Accordo finale Criobit (assistenza post-vendita) · firma NDA</span><span class="cn">Criobit（售后服务）最终协议 · 签署NDA</span></div>
+      <div class="action-cell priority-med">🟡 <span class="it">Media</span><span class="cn">中</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">07 Mar</div>
+      <div class="action-cell action-who">PT#1</div>
+      <div class="action-cell action-task"><span class="it">Setup CRM (pipeline B2C) · importazione lead da fiere e scouting Feb 2026</span><span class="cn">设置CRM（B2C管道）· 导入2026年2月展会和开发线索</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">07 Mar</div>
+      <div class="action-cell action-who">PT#3</div>
+      <div class="action-cell action-task"><span class="it">Setup sistema fatturazione · listini FV + Desner + BESS · template contratti</span><span class="cn">设置开票系统 · FV+Desner+BESS价格表 · 合同模板</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">10 Mar</div>
+      <div class="action-cell action-who">Prod. Mgr</div>
+      <div class="action-cell action-task"><span class="it">Apertura partita IVA SRL + conti bancari · firma accordo ITB Auto ufficiale</span><span class="cn">SRL开设增值税号+银行账户 · 签署ITB Auto正式协议</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">15 Mar</div>
+      <div class="action-cell action-who">Dir. Comm.</div>
+      <div class="action-cell action-task"><span class="it">Prima riunione rete ANPTE · presentazione Web App SKILL · onboarding promotori</span><span class="cn">首次ANPTE网络会议 · 演示SKILL网页应用 · 推广员入职</span></div>
+      <div class="action-cell priority-med">🟡 <span class="it">Media</span><span class="cn">中</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">20 Mar</div>
+      <div class="action-cell action-who">Prod. Mgr</div>
+      <div class="action-cell action-task"><span class="it">Primo beta test Web App SKILL (modulo aspirante → SKILL 1)</span><span class="cn">SKILL网页应用首次测试（申请人→SKILL 1模块）</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+    <div class="action-item">
+      <div class="action-cell action-date">31 Mar</div>
+      <div class="action-cell action-who"><span class="it">Entrambi</span><span class="cn">双方</span></div>
+      <div class="action-cell action-task"><span class="it">Primi contratti B2C + fatture + report KPI 1 + prima Desner venduta</span><span class="cn">首批B2C合同+发票+KPI报告1+首台Desner售出</span></div>
+      <div class="action-cell priority-high">🔴 <span class="it">Alta</span><span class="cn">高</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- FOOTER                                 -->
+<!-- ═══════════════════════════════════════ -->
+<footer>
+  <div>
+    <div class="footer-brand">CUBE<br>ITALIA</div>
+    <div style="margin-top:12px;font-size:13px;color:var(--muted);font-style:italic">
+      <span class="it">La rete che porta l'energia pulita dove conta.</span>
+      <span class="cn">将清洁能源输送到最需要的地方。</span>
+    </div>
+  </div>
+  <div class="footer-meta">
+    <div>CUBE ITALIA S.R.L.</div>
+    <div>Via del Purgatorio · Prato (PO)</div>
+    <div style="margin-top:8px;color:var(--gold)">MVP Avvio / 启动: 01.03.2026</div>
+    <div style="color:var(--muted);font-size:9px;margin-top:4px">
+      <span class="it">CONFIDENZIALE — Uso interno soci</span>
+      <span class="cn">保密 — 仅供内部股东使用</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Language switcher
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+  document.getElementById('btn-cn').classList.toggle('active', lang === 'cn');
+}
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal, .tl-item');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => obs.observe(el));
+
+// Nav dots
+const sections = ['hero','traction','products','mvp','economics','tiers','partners','kpi','scale','action'];
+const dots = document.querySelectorAll('.nav-dot');
+
+const secObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio > 0.3) {
+      const idx = sections.indexOf(e.target.id);
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(id => {
+  const el = document.getElementById(id);
+  if (el) secObs.observe(el);
+});
+
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    document.getElementById(sections[i])?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Cashflow bar chart
+const cfData = [
+  { m: 'Mar', val: -114, label: '-114k' },
+  { m: 'Apr', val: -6, label: '-6k' },
+  { m: 'Mag', val: 7, label: '+7k' },
+  { m: 'Giu', val: 16, label: '+16k' },
+  { m: 'Lug', val: 22, label: '+22k' },
+  { m: 'Ago', val: 26, label: '+26k' },
+  { m: 'Set', val: 26, label: '+26k' },
+  { m: 'Ott', val: 28, label: '+28k' },
+  { m: 'Nov', val: 31, label: '+31k' },
+  { m: 'Dic', val: 35, label: '+35k' },
+  { m: '\'27 Jan', val: 39, label: '+39k' },
+  { m: '\'27 Feb', val: 42, label: '+42k' },
+];
+
+const maxAbs = Math.max(...cfData.map(d => Math.abs(d.val)));
+const container = document.getElementById('cfbars');
+
+cfData.forEach(d => {
+  const wrap = document.createElement('div');
+  wrap.className = 'cf-bar-wrap';
+
+  const valEl = document.createElement('div');
+  valEl.className = 'cf-bar-val';
+  valEl.textContent = d.label;
+  valEl.style.color = d.val < 0 ? 'var(--red)' : 'var(--green)';
+
+  const bar = document.createElement('div');
+  const pct = Math.max(Math.abs(d.val) / maxAbs * 100, 3);
+  bar.className = 'cf-bar ' + (d.val < 0 ? 'neg' : 'pos');
+  bar.style.height = pct + '%';
+
+  const lbl = document.createElement('div');
+  lbl.className = 'cf-bar-lbl';
+  lbl.textContent = d.m;
+
+  wrap.appendChild(valEl);
+  wrap.appendChild(bar);
+  wrap.appendChild(lbl);
+  container.appendChild(wrap);
+});
+</script>
+</body>
+</html>
